@@ -34,7 +34,7 @@ function uploadFile (file, cb) {
 
 - `config` - Configure the upload (the file is passed here)
 - `progress` - Progress callback. Called with a floating point value indicating the percentage done.
-- `done` - Called when the upload is finished. An error is passed as the first argument if one happens.
+- `done(err, url)` - Called when the upload is finished. An error is passed as the first argument if one happens. If successful, the url of the uploaded resource is returned as the second parameter.
 
 ### Config
 
