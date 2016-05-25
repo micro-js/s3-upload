@@ -2,7 +2,7 @@
   "name": "@f/s3-upload",
   "description": "Upload a file to s3",
   "repository": "git://github.com/micro-js/s3-upload.git",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
