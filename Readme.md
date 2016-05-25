@@ -17,6 +17,15 @@ Upload a file to s3
 ```js
 var s3Upload = require('@f/s3-upload')
 
+function uploadFile (file, cb) {
+  // Request an S3 credential from the server
+  return api
+    .get('/upload')
+    .then(S3 => s3Upload({
+      file,
+      S3
+    }, cb))
+}
 ```
 
 ## API
@@ -30,20 +39,20 @@ var s3Upload = require('@f/s3-upload')
 ### Config
 
   * `file` - The file you want to upload
+  * `S3` - An S3 credential object
   * `type` - File mime type. If not specified, pulled from the file object
-  * `name` - The name of the file to upload
-  * `protocol` - Protocol (e.g. `http|https`)
-  * `attachment` - Whether or not this file has a content-disposition of attachment (will cause a download dialog to open when the link is requested later)
-  * `meta` - Object of AWS S3 meta headers / values to pass
+  * `name` - The name of the file to upload. If not specified, grabbed from `file.name`
+  * `protocol` - Protocol (e.g. `http|https`). If not specified uses `window.location.protocol` (be mindful of this if using it on the server, an error will be thrown if `protocol isn't specified).
+  * `attachment` - Whether or not this file has a content-disposition of attachment (will cause a download dialog to open when the link is requested later). Optional.
+  * `meta` - Object of AWS S3 meta headers / values to pass. Optional.
 
-  * `bucket`
-  if (!S3.signature) throw new Error('S3.signature required')
-  if (!S3.bucket) throw new Error('S3.bucket required')
-  if (!S3.policy) throw new Error('S3.policy required')
-  if (!S3.file) throw new Error('S3.file required')
-  if (!S3.key) throw new Error('S3.key required')
-  if (!S3.acl) throw new Error('S3.acl required')
-**Returns:**
+## S3 Credential
+
+  * `signature` - A signature of the other properties
+  * `bucket` - The bucket you are authorized to upload to
+  * `policy` - The policy of the upload (e.g. how big the file can be)
+  * `key` - Access key id
+  * `acl` - Acl for the upload
 
 ## License
 
